@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {Home} from './pages/home/Home';
 import Header from './components/header/Header';
 import { Post } from './pages/post/Post';
+import { HelmetProvider } from 'react-helmet-async';
+
 // import {Post} from './pages/post/Post';
 // // import Footer from './components/footer/Footer';
 
@@ -36,6 +38,7 @@ function App() {
     //   <Footer/>
     // </div>
     <>
+    <HelmetProvider>
     <BrowserRouter>
     <div className="appContainer" >
       <Header />
@@ -46,9 +49,7 @@ function App() {
       <Footer />
     </div>
     </BrowserRouter>
-
-     
-
+    </HelmetProvider>
     </>
   )
 }

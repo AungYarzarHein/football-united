@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Seo } from "../../utils/Seo";
 import "./homeStyle.css";
-import homeFeature from "../../assets/imger.jpeg";
+// import homeFeature from "../../assets/imger.jpeg";
 import {data} from "../../components/data";
 import HomeOtherNews from "../../components/homeOtherNews/HomeOtherNews";
 // import { fetchAllPost } from '../../utils/firebaseCrud';
@@ -32,7 +33,7 @@ export const Home = () => {
   .then(documents => {
     let dataArray = []
         documents.forEach(doc => {
-          console.log(doc.data()) ;
+          // console.log(doc.data()) ;
           dataArray.push(doc.data());
         })
 
@@ -49,9 +50,17 @@ export const Home = () => {
  },[])
 
   return (
-    <div className='homeContainer' >
+
+    // <Fragment>
+    //   <Seo type="article" title={"football-united"} description={"Football united "} imageUrl={ homeFeature}  >
+
       
+    <div className='homeContainer' >
+      {
+        posts.length && <Seo type="article" title={"football-united"} description={posts[0].title} imageUrl={ posts[0].imageUrl}  > </Seo>
+      }
       <div className="homeContentBody">
+
       <div className="homeHeader">
         {
           posts.length ? <img src={posts[0].imageUrl} alt="Home Feature Image" className='homeFeatureImage'  /> : <div className='loading' >         <LineWave height={100} width={100} firstLineColor='red' middleLineColor='green' lastLineColor='blue' />
@@ -64,12 +73,12 @@ export const Home = () => {
           {posts.length && posts[0].title}
         </h2>
       </div>
-     {console.log(posts)}
+     
       <div className="homeContentData">
         {/* <LineWave height={100} width={100} firstLineColor='red' middleLineColor='green' lastLineColor='blue' /> */}
-        <p>
+        {/* <p>
           {data.dataText}
-        </p>
+        </p> */}
         {
           lastPost.length && lastPost.map((item,index) => {
               // console.log(item.downloadUrl)
@@ -88,6 +97,9 @@ export const Home = () => {
       <HomeOtherNews otherNewsData={posts} />
       
     </div>
+
+    // </Seo>
+    // </Fragment>
   )
 }
 
